@@ -21,10 +21,10 @@
 npm install cookie-watchdog
 ```
 
-### Via CDN:
+### Via Browser:
 Include the library directly in your HTML:
 ```html
-<script src="https://cdn.example.com/cookie-watchdog.js"></script>
+<script src="/cookie-watchdog.js"></script>
 ```
 
 ---
