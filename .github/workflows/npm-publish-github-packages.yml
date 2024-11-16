@@ -14,7 +14,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '16'  # Specify your Node.js version
+        node-version: '20'  # Specify your Node.js version
 
     - name: Install dependencies
       run: npm install
@@ -35,7 +35,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: ${{ env.RELEASE_TAG }}  # Use the dynamically generated tag from the branch name
-        release_name: ${{ env.RELEASE_TAG }}  # Use the same name for the release
+        name: ${{ env.RELEASE_TAG }}  # Use 'name' instead of 'release_name'
 
     - name: Publish the package (optional)
       run: npm publish  # Optional, only if you're publishing the package to npm
