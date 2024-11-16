@@ -98,6 +98,8 @@ CookieWatchdog.unwatch('user_token');
 
 Cookie Watchdog relies on the `cookieStore` API, which is supported in modern browsers. If the `cookieStore` API is not available, the library will log an error and fail gracefully.
 
+TO-DO cookieStore polyfill based on a pulling for proper support on Safari and Firefox
+
 ## Contributing
 
 We welcome contributions to improve Cookie Watchdog! Feel free to open issues, submit pull requests, or suggest improvements.
