@@ -1,9 +1,7 @@
-name: Publish Release on Push to Main
+name: Publish Release on Manual Trigger
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:  # This enables manual triggering of the workflow
 
 jobs:
   release:
@@ -24,15 +22,20 @@ jobs:
     - name: Build the project
       run: npm run build  # Adjust if you have a custom build script
 
-    - name: Create a GitHub release
-      uses: gh-actions/create-release@v1.0.0
+    - name: Determine release version based on current branch
+      id: get_version
+      run: |
+        BRANCH_NAME=$(echo "${GITHUB_REF#refs/heads/}" | sed 's/\//-/g')  # Replace slashes with hyphens for branch name
+        echo "Release branch: $BRANCH_NAME"
+        echo "RELEASE_TAG=v$BRANCH_NAME" >> $GITHUB_ENV  # Set the version name based on the branch
+
+    - name: Create GitHub release
+      uses: softprops/action-gh-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: "v${{ github.run_number }}"
-        release_name: "Release v${{ github.run_number }}"
-        draft: false
-        prerelease: false
+        tag_name: ${{ env.RELEASE_TAG }}  # Use the dynamically generated tag from the branch name
+        release_name: ${{ env.RELEASE_TAG }}  # Use the same name for the release
 
     - name: Publish the package (optional)
       run: npm publish  # Optional, only if you're publishing the package to npm
