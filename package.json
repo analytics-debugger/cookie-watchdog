@@ -1,0 +1,47 @@
+{
+  "name": "cookie-watcher",
+  "version": "0.0.1-beta.0",
+  "type": "module",
+  "description": "Cookie Watchdog is a lightweight JavaScript library for monitoring cookie availability and detecting changes in real-time",
+  "main": "dist/cookie-watchdog.cjs.js",
+  "module": "dist/cookie-watchdog.esm.js",
+  "unpkg": "dist/cookie-watchdog.umd.js",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "rimraf dist && rollup -c",
+    "dev": "rollup -c -w",
+    "npm_prerelease_alpha": "npm version prerelease --preid=alpha",
+    "npm_prerelease_beta": "npm version prerelease --preid=beta",
+    "npm_patch": "npm version patch",
+    "npm_minor": "npm version minor",
+    "npm_major": "npm version major",
+    "npm_publish": "npm publish --access public"
+  },
+  "keywords": [
+    "cookies",
+    "cookieStore",
+    "browser",
+    "monitor"
+  ],
+  "author": "David Vallejo",
+  "license": "MIT",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.8",
+    "@rollup/plugin-node-resolve": "^15.3.0",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@babel/preset-env": "^7.26.0",
+    "@rollup/plugin-babel": "^6.0.4",
+    "rimraf": "^5.0.0",
+    "rollup": "^4.27.2",
+    "rollup-plugin-dts": "^6.0.0"
+  },
+  "dependencies": {
+
+  },
+  "peerDependencies": {
+    "core-js": "^3.0.0"
+  }
+}
