@@ -70,21 +70,24 @@ CookieWatchdog.unwatch('session_id');
 
 ## API
 
-### `watch(cookieName, callback, untilReady = false)`
+### `watch(cookieName, callback, options = { untilReady: false })`
 - **`cookieName`**: Name of the cookie to monitor.
 - **`callback`**: Function to invoke when the cookie changes.
-- **`untilReady`** (optional): If `true`, stops listening after the first event that matches the criteria (default: `false`).
+- **`options`** (optional): An object to configure the watch behavior.
+    - **`untilReady`**: If set to `true`, stops listening after the first event that matches the criteria (default: `false`).
 
 #### Example:
 ```javascript
 CookieWatchdog.watch('user_token', (change) => {
     console.log(`Token changed:`, change);
-}, true);
+}, {
+    untilReady: true // Stop listening after the first change
+});
 ```
 
 ---
 
-### `unwatch(cookieName, callback)`
+### `unwatch(cookieName)`
 - **`cookieName`**: Name of the cookie to stop monitoring.
 
 #### Example:
