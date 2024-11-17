@@ -72,14 +72,12 @@
 
         // Add global listener if it's the first watcher
         if (this.watchers.size === 0) {
-          console.log('ADD GLOBAL LISTENER');
           window.cookieStore.addEventListener('change', this.listener);
         }
         const watcherPointer = this.watchers.get(cookieName);
         if (watcherPointer) {
           throw new Error(`A listener already exists for the cookie: ${cookieName}`);
         } else {
-          console.log(arguments);
           const currentCookieValue = this.getCookie(cookieName);
           this.watchers.set(cookieName, {
             value: currentCookieValue,
