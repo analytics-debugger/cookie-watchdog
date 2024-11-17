@@ -1,3 +1,9 @@
+import {
+    cookieStore as cookieStorePolyfill,
+    CookieStore as CookieStorePolyfill,
+    CookieChangeEvent as CookieChangeEventPolyfill,
+} from 'cookie-store';
+
 const CookieWatchdog = {
     // Internal state: Maps to store cookies and respective callbacks
     watchers: new Map(),
@@ -6,10 +12,11 @@ const CookieWatchdog = {
     checkCookieStoreApi() {
         if (typeof window === 'undefined' || !("cookieStore" in window)) {
             console.error("cookieStore API is not supported in this browser.");
-            return false;
-        } else {
-            return true;
+            window.cookieStore = cookieStorePolyfill
+            window.CookieStore = CookieStorePolyfill
+            window.CookieChangeEvent = CookieChangeEventPolyfill
         }
+        return true;
     },
 
     // Internal: Get the value of a specific cookie

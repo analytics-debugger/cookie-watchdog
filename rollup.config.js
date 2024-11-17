@@ -1,5 +1,7 @@
 import babel from '@rollup/plugin-babel';
 import terser from '@rollup/plugin-terser';
+import resolve from '@rollup/plugin-node-resolve';
+
 
 
 export default {
@@ -11,7 +13,6 @@ export default {
             format: 'umd',
             name: 'CookieWatchdog',
             sourcemap: true,
-            plugins: [],
         },
         {
             file: 'dist/cookie-watchdog-min.js',
@@ -37,7 +38,6 @@ export default {
             format: 'iife',
             name: 'CookieWatchdog',
             sourcemap: true,
-            plugins: [],
         },
         // IIFE Format Minified (with ES5 transpilation)
         {
@@ -48,6 +48,7 @@ export default {
         },
     ],
     plugins: [
+        // Apply Babel globally for ES5 transpilation
         babel({
             exclude: 'node_modules/**', // Only transpile files not in node_modules
             presets: [
@@ -59,5 +60,7 @@ export default {
             ],
             babelHelpers: 'bundled', // Use bundled Babel helpers for transpiling
         }),
+        resolve(),  // Helps resolve node modules in browser builds
+
     ],
 };
